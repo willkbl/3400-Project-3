@@ -21,7 +21,7 @@ public class ThrowSpear : MonoBehaviour
             {
                 if (hit.collider.CompareTag("WeakPoint"))
                 {
-                    hit.collider.GetComponent<SpiderDamage>().takeHeavyDamage();
+                    hit.collider.transform.parent.gameObject.GetComponent<SpiderDamage>().takeHeavyDamage();
                 }
                 else if (hit.collider.CompareTag("Spider"))
                 {
