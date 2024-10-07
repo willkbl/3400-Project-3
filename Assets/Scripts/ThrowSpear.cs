@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class ThrowSpear : MonoBehaviour
 {
+
+    public AudioClip spearSound;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +22,7 @@ public class ThrowSpear : MonoBehaviour
 
             if (Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity))
             {
+                AudioSource.PlayClipAtPoint(spearSound, transform.position);
                 if (hit.collider.CompareTag("WeakPoint"))
                 {
                     hit.collider.transform.parent.gameObject.GetComponent<SpiderDamage>().takeHeavyDamage();

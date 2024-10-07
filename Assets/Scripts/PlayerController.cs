@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
     public float gravity = 60.2f;
     public float airControl = 10f;
 
+    public AudioClip jumpSound;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,6 +40,7 @@ public class PlayerController : MonoBehaviour
             if (Input.GetButton("Jump"))
             {
                 moveDirection.y = Mathf.Sqrt(2 * jumpHeight * gravity);
+                AudioSource.PlayClipAtPoint(jumpSound, transform.position);
             }
             else
             {
