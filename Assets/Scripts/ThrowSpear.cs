@@ -7,6 +7,9 @@ public class ThrowSpear : MonoBehaviour
 
     public AudioClip spearSound;
 
+    public float spearTimer = 0.0f;
+    public float spearTimeBetweenThrows = 1.0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -16,9 +19,11 @@ public class ThrowSpear : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") && spearTimer >= spearTimeBetweenThrows)
         {
             RaycastHit hit;
+
+            spearTimer = 0.0f;
 
             if (Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity))
             {
@@ -33,5 +38,7 @@ public class ThrowSpear : MonoBehaviour
                 }
             }
         }
+
+        spearTimer += Time.deltaTime;
     }
 }

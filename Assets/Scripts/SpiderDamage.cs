@@ -7,12 +7,14 @@ public class SpiderDamage : MonoBehaviour
 
     MeshRenderer meshRenderer;
     Color origColor;
-    float flashTime = .15f;
+    public float flashTime = .15f;
+    public float eyebrowTime = 1.0f;
 
     public Color lightDamageColor;
     public Color heavyDamageColor;
 
     AudioSource damageAudio;
+    public GameObject eyebrows;
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +22,7 @@ public class SpiderDamage : MonoBehaviour
         meshRenderer = GetComponent<MeshRenderer>();
         origColor = meshRenderer.material.color;
         damageAudio = GetComponent<AudioSource>();
+        eyebrows.SetActive(false);
     }
 
     // Update is called once per frame
@@ -42,11 +45,18 @@ public class SpiderDamage : MonoBehaviour
         this.transform.GetChild(0).GetComponent<MeshRenderer>().material.color = heavyDamageColor;
         Invoke("FlashStop", flashTime);
         damageAudio.Play();
+        eyebrows.SetActive(true);
+        Invoke("EyebrowsOff", eyebrowTime);
     }
 
     void FlashStop()
     {
         meshRenderer.material.color = origColor;
         this.transform.GetChild(0).GetComponent<MeshRenderer>().material.color = origColor;
+    }
+
+    void EyebrowsOff()
+    {
+        eyebrows.SetActive(false);
     }
 }
