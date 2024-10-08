@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,10 +15,15 @@ public class PlayerController : MonoBehaviour
     public float gravity = 60.2f;
     public float airControl = 10f;
 
+    public AudioClip jumpSound;
+    AudioSource footstepsSource;
+    public float footstepsVolume = 1.0f;
+
     // Start is called before the first frame update
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        footstepsSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -38,6 +44,7 @@ public class PlayerController : MonoBehaviour
             if (Input.GetButton("Jump"))
             {
                 moveDirection.y = Mathf.Sqrt(2 * jumpHeight * gravity);
+                AudioSource.PlayClipAtPoint(jumpSound, transform.position);
             }
             else
             {
@@ -55,5 +62,13 @@ public class PlayerController : MonoBehaviour
 
         controller.Move(moveDirection * Time.deltaTime);
 
+        footstepsSource.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
+        if ((moveHorizontal > 0.1 || moveVertical > 0.1) && controller.isGrounded)
+        {
+            footstepsSource.volume = footstepsVolume;
+        } else
+        {
+            footstepsSource.volume = 0;
+        }
     }
 }
