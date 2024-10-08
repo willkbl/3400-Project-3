@@ -722,6 +722,7 @@ MonoBehaviour:
   gravity: 60.2
   airControl: 10
   jumpSound: {fileID: 8300000, guid: a244a66b613e2134eb0cafb6fd90d2de, type: 3}
+  footstepsVolume: 1
 --- !u!143 &167966733
 CharacterController:
   m_ObjectHideFlags: 0
@@ -847,11 +848,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 17f516f994f82464d890c05eb1b4ea1c, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
